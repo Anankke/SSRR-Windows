@@ -452,6 +452,12 @@ namespace Shadowsocks.View {
                             urls.Add(selected_server.GetSSRLinkForServer());
                         }
                     }
+                    //排除关键词
+                    string filterText = updateFreeNodeChecker.subscribeTask.FilterText;
+                    string[] filter_texts = { };
+                    if (!String.IsNullOrEmpty(filterText)) {
+                        filter_texts = filterText.Split(',');
+                    }
 
                     // import all, find difference
                     {
@@ -477,6 +483,20 @@ namespace Shadowsocks.View {
                                     }
                                 }
                                 old_insert_servers[server.id] = server;
+                                //排除关键词
+                                if (filter_texts.Length > 0)
+                                {
+                                    foreach (string filter_text in filter_texts)
+                                    {
+                                        if (server.remarks.Contains(filter_text))
+                                        {
+                                            match = true;
+                                            Logging.Log(LogLevel.Debug, "server will be remove:" + server.remarks);
+                                            break;
+                                        }
+                                    }
+                                }
+                                //
                                 if (!match) {
                                     foreach (KeyValuePair<string, Server> pair in old_servers) {
                                         if (server.isMatchServer(pair.Value)) {
