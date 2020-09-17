@@ -213,6 +213,7 @@ URL=网址
 Group name=组名
 Last Update=最近更新
 Auto update=自动更新
+Filter Text=排除关键词
 
 # Messages
 

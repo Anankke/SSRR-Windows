@@ -41,6 +41,7 @@ namespace Shadowsocks.View
             buttonOK.Text = I18N.GetString("OK");
             buttonCancel.Text = I18N.GetString("Cancel");
             label3.Text = I18N.GetString("Last Update");
+            label4.Text = I18N.GetString("Filter Text");
         }
 
         private void SubscribeForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -124,6 +125,7 @@ namespace Shadowsocks.View
                 ServerSubscribe ss = _modifiedConfiguration.serverSubscribes[index];
                 textBoxURL.Text = ss.URL;
                 textBoxGroup.Text = ss.Group;
+                textBoxFilter.Text = ss.FilterText;
                 _old_select_index = index;
                 if (ss.LastUpdateTime != 0)
                 {
@@ -149,6 +151,7 @@ namespace Shadowsocks.View
                     ss.Group = "";
                     ss.LastUpdateTime = 0;
                 }
+                ss.FilterText = textBoxFilter.Text;
             }
         }
 
